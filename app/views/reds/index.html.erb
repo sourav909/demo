@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+<h2>All domains</h2>
+
+ <table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Global</th>
+      <th>Country</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reds.each do |red| %>
+      <tr>
+        <td><%= red.email %></td>
+        <td><%= red.global %></td>
+        <td><%= red.country %></td>
+        <td><%= link_to 'Edit', edit_red_path(red) %></td>
+        <td><%= link_to 'Destroy', red, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<% if current_user.reds.count >= 3 %>
+  Sorry you are limit is Exceeds.
+<% else %>
+  <%= link_to 'New domain', new_red_path %>
+<% end %>
+</div>
+</body>
+</html>
